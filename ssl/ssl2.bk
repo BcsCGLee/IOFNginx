@@ -1,0 +1,109 @@
+#-----------------------------------------------------------------------------------------------#
+# HTTPS server
+#-----------------------------------------------------------------------------------------------#
+server {
+    listen       443 ssl;
+    add_header X-Frame-Options "SAMEORIGIN";
+
+    server_name  crazychimacoc.com   
+        mybestwings.com    
+        miyabibay.com   
+        wwpokebar.com   
+        kctorrance.com  
+        tummystuffersfs.com 
+        orderkashirajapan.com   
+        alleypoke.com   
+        momosushila.com 
+        espokebar.com   
+        cupertino.curryhouseusa.com 
+        cypress.curryhouseusa.com   
+        gardena.curryhouseusa.com   
+        irvine.curryhouseusa.com    
+        koreatown.curryhouseusa.com 
+        littletokyo.curryhouseusa.com   
+        puentehills.curryhouseusa.com   
+        santaana.curryhouseusa.com  
+        torrance.curryhouseusa.com  
+        westla.curryhouseusa.com    
+        dragonspond.com 
+        emilygrilltogo.com 
+        sanramonsushi.com   
+        andaletacos.com 
+        vonschickenconcord.com  
+        italianopizzeria-pg.com 
+        cozycornerexpress.com   
+        tpokebar.com    
+        dcbestwings.com 
+        murasakijr.com  
+        thepokewave.com 
+        atriumcafeist.com   
+        manpukulivermore.com    
+        tajindiapalace.us   
+        undertheseallc.com  
+        dtpokebar.com   
+        daraewon.com    
+        ahracafedc.com  
+        zasom.com
+        barrospizzadb.com   
+        mrpokedb.com    
+        wings21woodmore.com 
+        1600kitchen.com 
+        kingkongdimsum.com  
+        cafebellajoe.com    
+        montereypark.curryhouseusa.com  
+        wings21kettering.com    
+        koyomisushi.com 
+        collinsfishmarket.com   
+        ktownexpress.com    
+        ginzaoakland.com    
+        mixabowldtla.com    
+        pokeocncafe.com 
+        pokiandsushi.com    
+        chickfresha.com 
+        mgtofubbq.com   
+        tofuyatogo.com  
+        sushiloverca.com    
+        pokicraft2togo.com  
+        chefleeak.com   
+        jikaramen.com   
+        mackysnoodle.com    
+        theclubburger.com   
+        pekingtogo.com  
+        pho32shabu.com  
+        domo7chester.com
+	hyundaicafecatering.com
+	hollywoodsushila.com
+	uptownercafe2400.com
+	skpizzasubs.com
+	valentinospizzeriaonline.com
+        pekingwokak.com
+	;
+    ssl     on;
+    ssl_certificate      /etc/pki/tls/certs/multi_iorderfoods2_CA.crt;
+    ssl_certificate_key  /etc/pki/tls/certs/multi_iorderfoods2.key;
+
+    ssl_session_timeout  5m;
+    ssl_ciphers  HIGH:!aNULL:!MD5;
+    ssl_prefer_server_ciphers  on;
+    ssl_protocols TLSv1.1 TLSv1.2; # Dropping SSLv3, ref: POODLE
+
+    root /usr/local/www/apache24/html/app/webroot;
+    index index.html index.php;
+
+    location / {
+       try_files $uri $uri?$args $uri/ /index.php?$uri&$args /index.php?$args;
+    }
+
+    location ~ \.php$ {
+        try_files $uri =404;
+        fastcgi_split_path_info ^(.+\.php)(/.+)$;
+        include /etc/nginx/fastcgi_params;
+        fastcgi_pass   127.0.0.1:9000;
+        fastcgi_index index.php;
+        fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+    }
+
+    location = /favicon.ico { access_log off; log_not_found off; }
+    location = /robots.txt  { access_log off; log_not_found off; }
+}
+
